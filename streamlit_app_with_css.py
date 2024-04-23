@@ -12,10 +12,30 @@ db_name =  st.secrets["DB_NAME"]
 db_user =  st.secrets["DB_USER"]
 db_password =  st.secrets["DB_PASSWORD"]
 
+# Crea una conexión con la base de datos
+conn = mysql.connector.connect(host=db_host, port=db_port, database=db_name, user=db_user,password=db_password)
+
+# Crea un cursor para ejecutar comandos SQL
+cur = conn.cursor()
+
+# Ejecuta una consulta SQL
+sql = "SELECT idc, pregunta, resposta, data, curso FROM teclaPREGUNTES WHERE tema = '10000'"
+
+cur.execute(sql)
+
+# Obtiene los resultados de la consulta
+results_database = cur.fetchall()
+x = len(results_database)
+conn.commit()
+
+# Cierra la conexión con la base de datos
+cur.close()
+conn.close()
+
 #######################
 # Page configuration
 st.set_page_config(
-    page_title="STEAMBuilder - Dashboard",
+    page_title="STEAMBuilder - Dashboard"+x,
     page_icon="🏂",
     layout="wide",
     initial_sidebar_state="expanded")
@@ -80,7 +100,7 @@ df_reshaped = pd.read_csv('data/us-population-2010-2019-reshaped.csv')
 #######################
 # Sidebar
 with st.sidebar:
-    st.title('🏂 STEAMBuilder - Dashboard ')
+    st.title('🏂 STEAMBuilder - Dashboard')
     
     year_list = list(df_reshaped.year.unique())[::-1]
     
