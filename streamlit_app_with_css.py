@@ -25,7 +25,7 @@ cur.execute(sql)
 
 # Obtiene los resultados de la consulta
 results_database = cur.fetchall()
-count = results_database.rowcount
+count = len(results_database)
 conn.commit()
 
 # Cierra la conexión con la base de datos
