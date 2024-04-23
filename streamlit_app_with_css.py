@@ -25,18 +25,21 @@ cur.execute(sql)
 
 # Obtiene los resultados de la consulta
 results_database = cur.fetchall()
-count = len(results_database)
-print(count)
+
 conn.commit()
 
 # Cierra la conexión con la base de datos
 cur.close()
 conn.close()
+all_user_id = []
+
+for idc in results_database:
+    all_user_id.append(idc)
 
 #######################
 # Page configuration
 st.set_page_config(
-    page_title="STEAMBuilder - Dashboard"+str(count),
+    page_title="STEAMBuilder - Dashboard",
     page_icon="🏂",
     layout="wide",
     initial_sidebar_state="expanded")
@@ -101,7 +104,7 @@ df_reshaped = pd.read_csv('data/us-population-2010-2019-reshaped.csv')
 #######################
 # Sidebar
 with st.sidebar:
-    st.title('🏂 STEAMBuilder - Dashboard')
+    st.title('🏂 STEAMBuilder - Dashboard'+str(all_user_id))
     
     year_list = list(df_reshaped.year.unique())[::-1]
     
