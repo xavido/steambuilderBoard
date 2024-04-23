@@ -6,8 +6,6 @@ import altair as alt
 import plotly.express as px
 import mysql.connector
 
-
-assistant_id = st.secrets["OPENAI_ASSISTANT"]
 db_host = st.secrets["DB_HOST"]
 db_port = st.secrets["DB_PORT"]
 db_name =  st.secrets["DB_NAME"]
