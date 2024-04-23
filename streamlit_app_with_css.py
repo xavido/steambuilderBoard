@@ -4,6 +4,15 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 import plotly.express as px
+import mysql.connector
+
+
+assistant_id = st.secrets["OPENAI_ASSISTANT"]
+db_host = st.secrets["DB_HOST"]
+db_port = st.secrets["DB_PORT"]
+db_name =  st.secrets["DB_NAME"]
+db_user =  st.secrets["DB_USER"]
+db_password =  st.secrets["DB_PASSWORD"]
 
 #######################
 # Page configuration
@@ -73,7 +82,7 @@ df_reshaped = pd.read_csv('data/us-population-2010-2019-reshaped.csv')
 #######################
 # Sidebar
 with st.sidebar:
-    st.title('🏂 STEAMBuilder - Dashboard')
+    st.title('🏂 STEAMBuilder - Dashboard ')
     
     year_list = list(df_reshaped.year.unique())[::-1]
     
