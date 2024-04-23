@@ -238,66 +238,22 @@ with col[0]:
 
     df_num_interactions = count_interactions
 
-    st.metric(label='#Interaccions', value=df_num_interactions, delta='last_state_delta')
+    st.metric(label='#Interaccions', value=df_num_interactions, delta='total')
 
-    '''
+
     st.markdown('#### States Migration')
 
-    if selected_year > 2010:
-        # Filter states with population difference > 50000
-        # df_greater_50000 = df_population_difference_sorted[df_population_difference_sorted.population_difference_absolute > 50000]
-        df_greater_50000 = df_population_difference_sorted[df_population_difference_sorted.population_difference > 50000]
-        df_less_50000 = df_population_difference_sorted[df_population_difference_sorted.population_difference < -50000]
-        
-        # % of States with population difference > 50000
-        states_migration_greater = round((len(df_greater_50000)/df_population_difference_sorted.states.nunique())*100)
-        states_migration_less = round((len(df_less_50000)/df_population_difference_sorted.states.nunique())*100)
-        donut_chart_greater = make_donut(states_migration_greater, 'Inbound Migration', 'green')
-        donut_chart_less = make_donut(states_migration_less, 'Outbound Migration', 'red')
-    else:
-        states_migration_greater = 0
-        states_migration_less = 0
-        donut_chart_greater = make_donut(states_migration_greater, 'Inbound Migration', 'green')
-        donut_chart_less = make_donut(states_migration_less, 'Outbound Migration', 'red')
 
-    migrations_col = st.columns((0.2, 1, 0.2))
-    with migrations_col[1]:
-        st.write('Inbound')
-        st.altair_chart(donut_chart_greater)
-        st.write('Outbound')
-        st.altair_chart(donut_chart_less)
 
 with col[1]:
     st.markdown('#### Total Population')
     
-    choropleth = make_choropleth(df_selected_year, 'states_code', 'population', selected_color_theme)
-    st.plotly_chart(choropleth, use_container_width=True)
-    
-    heatmap = make_heatmap(df_reshaped, 'year', 'states', 'population', selected_color_theme)
-    st.altair_chart(heatmap, use_container_width=True)
-    
-'''
+
+
 
 with col[2]:
-    '''
-    st.markdown('#### Top States')
 
-    st.dataframe(df_selected_year_sorted,
-                 column_order=("states", "population"),
-                 hide_index=True,
-                 width=None,
-                 column_config={
-                    "states": st.column_config.TextColumn(
-                        "States",
-                    ),
-                    "population": st.column_config.ProgressColumn(
-                        "Population",
-                        format="%f",
-                        min_value=0,
-                        max_value=max(df_selected_year_sorted.population),
-                     )}
-                 )
-    '''
+    st.markdown('#### Top States')
     with st.expander('Sobre...', expanded=True):
         st.write('''
             - Dades generals de STEAMBuilder
