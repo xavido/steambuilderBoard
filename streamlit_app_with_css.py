@@ -25,7 +25,7 @@ cur.execute(sql)
 
 # Obtiene los resultados de la consulta
 results_database = cur.fetchall()
-x = len(results_database)
+count = results_database.rowcount
 conn.commit()
 
 # Cierra la conexión con la base de datos
@@ -35,7 +35,7 @@ conn.close()
 #######################
 # Page configuration
 st.set_page_config(
-    page_title="STEAMBuilder - Dashboard"+str(x),
+    page_title="STEAMBuilder - Dashboard"+str(count),
     page_icon="🏂",
     layout="wide",
     initial_sidebar_state="expanded")
