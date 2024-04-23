@@ -123,9 +123,9 @@ with st.sidebar:
     
     student_list = list(df_reshaped.idc.unique())[::-1]
     
-    selected_year = st.selectbox('Selecciona un/a alumne', student_list)
-    df_selected_year = df_reshaped[df_reshaped.year == selected_year]
-    df_selected_year_sorted = df_selected_year.sort_values(by="population", ascending=False)
+    selected_student = st.selectbox('Selecciona un/a alumne', student_list)
+    df_selected_student = df_reshaped[df_reshaped.year == selected_student]
+    df_selected_student_sorted = df_selected_student.sort_values(by="data", ascending=False)
 
     color_theme_list = ['blues', 'cividis', 'greens', 'inferno', 'magma', 'plasma', 'reds', 'rainbow', 'turbo', 'viridis']
     selected_color_theme = st.selectbox('Select a color theme', color_theme_list)
