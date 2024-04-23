@@ -26,6 +26,25 @@ cur.execute(sql)
 # Obtiene los resultados de la consulta
 results_database = cur.fetchall()
 count = len(results_database)
+# Student List
+all_idc = []
+all_pregunta = []
+all_resposta = []
+all_data = []
+all_curso = []
+
+for idc,pregunta,resposta,data,curso in results_database:
+    all_idc.append(idc)
+    all_pregunta.append(pregunta)
+    all_resposta.append(resposta)
+    all_data.append(data)
+    all_curso.append(curso)
+
+#we need to store this data to CSV
+dic = {'idc': all_idc , 'pregunta':all_pregunta, 'resposta':all_resposta, 'data':all_data, 'curso':all_curso}
+df = pd.DataFrame (dic)
+df_csv = df.to_csv('random.csv')
+
 conn.commit()
 
 # Cierra la conexión con la base de datos
@@ -100,11 +119,11 @@ df_reshaped = pd.read_csv('data/us-population-2010-2019-reshaped.csv')
 #######################
 # Sidebar
 with st.sidebar:
-    st.title('🏂 STEAMBuilder - Dashboard'+str(count))
+    st.title('🏂 STEAMBuilder - Dashboard')
     
     year_list = list(df_reshaped.year.unique())[::-1]
     
-    selected_year = st.selectbox('Select a year', year_list)
+    selected_year = st.selectbox('Selecciona un/a alumne', student_list)
     df_selected_year = df_reshaped[df_reshaped.year == selected_year]
     df_selected_year_sorted = df_selected_year.sort_values(by="population", ascending=False)
 
@@ -215,7 +234,7 @@ def calculate_population_difference(input_df, input_year):
 col = st.columns((1.5, 4.5, 2), gap='medium')
 
 with col[0]:
-    st.markdown('#### Gains/Losses')
+    st.markdown('#### Dades Generals')
 
     df_population_difference_sorted = calculate_population_difference(df_reshaped, selected_year)
 
