@@ -27,11 +27,11 @@ cur.execute(sql)
 results_database = cur.fetchall()
 count_interactions = len(results_database)
 # Student List
-all_idc = []
-all_pregunta = []
-all_resposta = []
-all_data = []
-all_curso = []
+all_idc = ['totxs']
+all_pregunta = ['totes les preguntes']
+all_resposta = ['totes les respostes']
+all_data = ['històric']
+all_curso = ['totes les etapes']
 
 for idc,pregunta,resposta,data,curso in results_database:
     all_idc.append(idc)
@@ -238,7 +238,7 @@ with col[0]:
 
     df_num_interactions = count_interactions
 
-    st.metric(label='#Interaccions', value=df_num_interactions, delta='total')
+    st.metric(label='#Interaccions', value=df_num_interactions, delta='total alumnes')
 
 
     st.markdown('#### States Migration')
