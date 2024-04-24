@@ -11,7 +11,12 @@ db_port = st.secrets["DB_PORT"]
 db_name =  st.secrets["DB_NAME"]
 db_user =  st.secrets["DB_USER"]
 db_password =  st.secrets["DB_PASSWORD"]
-
+df_num_interactions = 0
+all_idc = []
+all_pregunta = []
+all_resposta = []
+all_data = []
+all_curso = []
 
 # Dataviz by group or student
 
@@ -30,12 +35,6 @@ conn.commit()
 cur.close()
 conn.close()
 # Student List
-
-all_idc = []
-all_pregunta = []
-all_resposta = []
-all_data = []
-all_curso = []
 
 for idc,pregunta,resposta,data,curso in results_database:
     if idc != '':
