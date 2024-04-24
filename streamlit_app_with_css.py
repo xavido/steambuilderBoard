@@ -12,20 +12,23 @@ db_name =  st.secrets["DB_NAME"]
 db_user =  st.secrets["DB_USER"]
 db_password =  st.secrets["DB_PASSWORD"]
 
+
+# Dataviz by group or student
+
 # Crea una conexión con la base de datos
 conn = mysql.connector.connect(host=db_host, port=db_port, database=db_name, user=db_user,password=db_password)
 
 # Crea un cursor para ejecutar comandos SQL
 cur = conn.cursor()
-
 # Ejecuta una consulta SQL
 sql = "SELECT idc, pregunta, resposta, data, curso FROM teclaPREGUNTES WHERE tema = '10000'"
-
 cur.execute(sql)
-
 # Obtiene los resultados de la consulta
 results_database = cur.fetchall()
-count_interactions = len(results_database)
+conn.commit()
+# Cierra la conexión con la base de datos
+cur.close()
+conn.close()
 # Student List
 
 all_idc = []
@@ -53,11 +56,6 @@ dic = {'idc': all_idc , 'pregunta':all_pregunta, 'resposta':all_resposta, 'data'
 df = pd.DataFrame (dic)
 df_csv = df.to_csv('random.csv')
 
-conn.commit()
-
-# Cierra la conexión con la base de datos
-cur.close()
-conn.close()
 
 #######################
 # Page configuration
@@ -229,13 +227,10 @@ def format_number(num):
         return f'{round(num / 1000000, 1)} M'
     return f'{num // 1000} K'
 
-# Calculation year-over-year population migrations
-def calculate_population_difference(input_df, input_year):
-  selected_year_data = input_df[input_df['year'] == input_year].reset_index()
-  previous_year_data = input_df[input_df['year'] == input_year - 1].reset_index()
-  selected_year_data['population_difference'] = selected_year_data.population.sub(previous_year_data.population, fill_value=0)
-  return pd.concat([selected_year_data.states, selected_year_data.id, selected_year_data.population, selected_year_data.population_difference], axis=1).sort_values(by="population_difference", ascending=False)
-
+# Dataviz by group or student
+def datavizStudent(student_id):
+  if student_id == 'all':
+      df_num_interactions = len(results_database)
 
 #######################
 # Dashboard Main Panel
@@ -243,9 +238,7 @@ col = st.columns((1.5, 4.5, 2), gap='medium')
 
 with col[0]:
     st.markdown('#### Dades Generals')
-
-    df_num_interactions = count_interactions
-
+    datavizStudent(selected_student)
     st.metric(label='#Interaccions', value=df_num_interactions, delta='total alumnes')
 
 
