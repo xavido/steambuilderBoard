@@ -35,17 +35,13 @@ all_data = []
 all_curso = []
 
 for idc,pregunta,resposta,data,curso in results_database:
-    all_idc.append(idc)
-    all_pregunta.append(pregunta)
-    all_resposta.append(resposta)
-    all_data.append(data)
-    all_curso.append(curso)
+    if idc != '':
+        all_idc.append(idc)
+        all_pregunta.append(pregunta)
+        all_resposta.append(resposta)
+        all_data.append(data)
+        all_curso.append(curso)
 
-all_idc.pop(count_interactions-2)
-all_pregunta.pop(count_interactions-2)
-all_resposta.pop(count_interactions-2)
-all_data.pop(count_interactions-2)
-all_curso.pop(count_interactions-2)
 all_idc.append('totxs')
 all_pregunta.append('totes les preguntes')
 all_resposta.append('totes les respostes')
