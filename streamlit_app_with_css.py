@@ -228,9 +228,13 @@ def format_number(num):
 
 # Dataviz by group or student
 def datavizStudent(student_id):
+  df_num_interactions = len(results_database)
+
   if student_id != 'totxs':
       df_num_interactions = len(results_database)
-      return df_num_interactions
+
+return df_num_interactions
+
 
 #######################
 # Dashboard Main Panel
