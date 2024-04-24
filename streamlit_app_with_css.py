@@ -27,11 +27,7 @@ cur.execute(sql)
 results_database = cur.fetchall()
 count_interactions = len(results_database)
 # Student List
-all_idc = ['totxs']
-all_pregunta = ['totes les preguntes']
-all_resposta = ['totes les respostes']
-all_data = ['històric']
-all_curso = ['totes les etapes']
+
 
 for idc,pregunta,resposta,data,curso in results_database:
     all_idc.append(idc)
@@ -39,6 +35,17 @@ for idc,pregunta,resposta,data,curso in results_database:
     all_resposta.append(resposta)
     all_data.append(data)
     all_curso.append(curso)
+
+all_idc.remove('nan')
+all_pregunta.remove('nan')
+all_resposta.remove('nan')
+all_data.remove('nan')
+all_curso.remove('nan')
+all_idc.append('totxs')
+all_pregunta.append('totes les preguntes')
+all_resposta.append('totes les respostes')
+all_data.append('històric')
+all_curso.append('totes les etapes')
 
 #we need to store this data to CSV
 dic = {'idc': all_idc , 'pregunta':all_pregunta, 'resposta':all_resposta, 'data':all_data, 'curso':all_curso}
