@@ -28,6 +28,11 @@ results_database = cur.fetchall()
 count_interactions = len(results_database)
 # Student List
 
+all_idc = []
+all_pregunta = []
+all_resposta = []
+all_data = []
+all_curso = []
 
 for idc,pregunta,resposta,data,curso in results_database:
     all_idc.append(idc)
