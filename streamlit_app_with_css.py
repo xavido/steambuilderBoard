@@ -230,6 +230,7 @@ def format_number(num):
 def datavizStudent(student_id):
   if student_id != 'totxs':
       df_num_interactions = len(results_database)
+      return df_num_interactions
 
 #######################
 # Dashboard Main Panel
@@ -237,8 +238,8 @@ col = st.columns((1.5, 4.5, 2), gap='medium')
 
 with col[0]:
     st.markdown('#### Dades Generals')
-    datavizStudent(selected_student)
-    st.metric(label='#Interaccions', value=df_num_interactions, delta='total alumnes')
+
+    st.metric(label='#Interaccions', value=datavizStudent(selected_student), delta='total alumnes')
 
 
     st.markdown('#### States Migration')
